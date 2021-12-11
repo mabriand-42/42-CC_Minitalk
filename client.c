@@ -1,45 +1,38 @@
-#include <stdio.h>
-#include <sys/socket.h>
-#include <stdlib.h>
 #include <unistd.h>
-#include <netinet/in.h>
-#include <string.h>
-#include <arpa/inet.h>
+#include <sys/types.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <stdlib.h>
 
-#define PORT 8080
+#include <stdio.h>
 
-int main()
+// struct sigaction
+// {
+//     void     (*sa_handler) (int);
+//     void     (*sa_sigaction) (int, siginfo_t *, void *);
+//     sigset_t   sa_mask;
+//     int        sa_flags;
+//     void     (*sa_restorer) (void);
+// };
+ 
+void    printMsgHandler(int signum)
 {
-    int sock = 0; long valread;
-    struct sockaddr_in serv_addr;
-    char *hello = "Hello from client";
-    char buffer[1024] = {0};
-    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-    {
-        printf("\n Socket creation error \n");
-        return -1;
-    }
-    
-    memset(&serv_addr, '0', sizeof(serv_addr));
-    
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(PORT);
-    
-    // Convert IPv4 and IPv6 addresses from text to binary form
-    if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0)
-    {
-        printf("\nInvalid address/ Address not supported \n");
-        return -1;
-    }
-    
-    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
-    {
-        printf("\nConnection Failed \n");
-        return -1;
-    }
-    send(sock , hello , strlen(hello) , 0 );
-    printf("Hello message sent\n");
-    valread = read( sock , buffer, 1024);
-    printf("%s\n",buffer );
-    return 0;
+    printf("YOLO I MADE IT\n");
+    return ;
+}
+int     main(int ac, char **av)
+{
+    if (ac != 3)
+        return (0);
+    printf("Client speaking, I am receptionning PID = %s from server\n", av[1]);
+    printf("I must send him the following string: %s\n", av[2]);
+
+    int pid = atoi(av[1]);
+
+    struct sigaction new_action, old_action;
+
+    ret = sigaction(31, )
+    // kill(pid, SIGTERM);
+
+    return (0);
 }
