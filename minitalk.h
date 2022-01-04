@@ -3,28 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbenoit <adbenoit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 17:26:24 by adbenoit          #+#    #+#             */
-/*   Updated: 2021/10/12 20:21:52 by adbenoit         ###   ########.fr       */
+/*   Created: 2022/01/04 12:10:29 by mabriand          #+#    #+#             */
+/*   Updated: 2022/01/04 16:25:23 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
 
-# include "libft/inc/libft.h"
-# include <sys/types.h>
-# include <unistd.h>
-# include <signal.h>
-# include <stdbool.h>
-# include <string.h>
-# include <errno.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-typedef struct s_trans
+#include <stdio.h>
+
+#define BUFFER_SIZE 30000
+
+typedef struct	s_trans
 {
 	pid_t	pid;
-	char	*mess;
+	char*	msg;
 }				t_trans;
+
+int		ft_atoi(const char *str);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_error(char *strerror);
 
 #endif
