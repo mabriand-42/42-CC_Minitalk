@@ -6,12 +6,11 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:46:54 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/04 15:27:23 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/04 21:35:54 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
 
 int	ft_isdigit(int c)
 {
@@ -29,9 +28,9 @@ int	ft_isspace(int c)
 
 int	ft_atoi(const char *str)
 {
-	int i;
-	int minus;
-	int nbr;
+	int	i;
+	int	minus;
+	int	nbr;
 
 	i = 0;
 	minus = 1;
@@ -54,7 +53,7 @@ int	ft_atoi(const char *str)
 
 size_t	ft_strlen(const char *s)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -62,29 +61,28 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_putendl_fd(char *s, int fd)
+void	ft_putendl_fd(char *str, int fd)
 {
 	size_t	len;
 
-	if (s)
+	if (str)
 	{
-		len = ft_strlen(s);
-		write(fd, s, len);
+		len = ft_strlen(str);
+		write(fd, str, len);
 		write(fd, "\n", 1);
 	}
 	return ;
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *str, int fd)
 {
-	if (s != NULL)
-		write(fd, s, ft_strlen(s));
+	if (str != NULL)
+		write(fd, str, ft_strlen(str));
 }
 
-void	ft_error(char *strerror)
+void		ft_error(char *strerror)
 {
 	ft_putstr_fd("Error: ", 2);
 	ft_putendl_fd(strerror, 2);
 	exit(1);
-	return ;
 }

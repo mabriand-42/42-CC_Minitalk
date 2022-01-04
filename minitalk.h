@@ -6,23 +6,23 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:10:29 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/04 16:25:23 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/04 23:03:53 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
 
-#include <unistd.h>
-#include <sys/types.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <stdlib.h>
-#include <stdbool.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <signal.h>
+# include <sys/types.h>
+# include <stdlib.h>
+# include <stdbool.h>
 
-#include <stdio.h>
+# include <stdio.h>
 
-#define BUFFER_SIZE 30000
+// #define BUFFER_SIZE 3000
 
 typedef struct	s_trans
 {

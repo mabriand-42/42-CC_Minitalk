@@ -6,20 +6,20 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/04 16:22:27 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/04 23:17:32 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-t_trans			g_client;
+t_trans		g_client;
 
 static int	get_bit(char *str)
 {
 	bool		bit;
 	static int	i_bit = 0;
 	static int	i = 0;
-	
+
 	if (i_bit > 7)
 	{
 		if (!str[i])
@@ -62,7 +62,17 @@ static void	send_next_bit(int signum)
 	send_bit(g_client.pid, bit);
 }
 
-int	main(int ac, char** av)
+void	client_speaking(char *av1, char *av2)
+{
+	ft_putstr_fd("Client speaking. Receptionned the following:\n", 1);
+	ft_putstr_fd("PID = ", 1);
+	ft_putendl_fd(av1, 1);
+	ft_putstr_fd("MSG = ", 1);
+	ft_putendl_fd(av2, 1);
+	return ;
+}
+
+int	main(int ac, char **av)
 {
 	pid_t	pid_server;
 
@@ -71,22 +81,14 @@ int	main(int ac, char** av)
 		ft_error("Usage is as follows:\n'./client [PID] [string]'\n");
 		return (1);
 	}
-	ft_putstr_fd("Client speaking. Receptionned the following:\n", 1);
-	ft_putstr_fd("PID = ", 1);
-	ft_putendl_fd(av[1], 1);
-	ft_putstr_fd("MSG = ", 1);
-	ft_putendl_fd(av[2], 1);
-	
 	pid_server = ft_atoi(av[1]);
 	if (pid_server < 1)
 		ft_error("Wrong PID");
-
+	client_speaking(av[1], av[2]);
 	g_client.msg = av[2];
 	g_client.pid = pid_server;
-
 	signal(SIGUSR1, send_next_bit);
 	signal(SIGUSR2, send_next_bit);
-
 	send_bit(g_client.pid, get_bit(g_client.msg));
 	while (1)
 	{
