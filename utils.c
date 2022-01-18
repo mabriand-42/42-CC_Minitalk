@@ -6,25 +6,11 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:46:54 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/04 21:35:54 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:54:56 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int	ft_isspace(int c)
-{
-	if (c == ' ' || c == '\t' ||c == '\n' || c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
 
 int	ft_atoi(const char *str)
 {
@@ -51,14 +37,34 @@ int	ft_atoi(const char *str)
 	return (nbr * minus);
 }
 
-size_t	ft_strlen(const char *s)
+char				*ft_itoa(int n)
 {
-	size_t	i;
+	long	tmp;
+	char	*str;
+	size_t	len;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	tmp = (long)n;
+	str = NULL;
+	len = ft_intlen(tmp);
+	if (n < 0)
+	{
+		len += 1;
+		tmp *= -1;
+	}
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str != NULL)
+	{
+		str[len] = '\0';
+		while (len > 0)
+		{
+			str[len - 1] = (tmp % 10) + '0';
+			len--;
+			tmp /= 10;
+		}
+		if (n < 0)
+			str[0] = '-';
+	}
+	return (str);
 }
 
 void	ft_putendl_fd(char *str, int fd)
@@ -72,12 +78,6 @@ void	ft_putendl_fd(char *str, int fd)
 		write(fd, "\n", 1);
 	}
 	return ;
-}
-
-void	ft_putstr_fd(char *str, int fd)
-{
-	if (str != NULL)
-		write(fd, str, ft_strlen(str));
 }
 
 void		ft_error(char *strerror)

@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/04 23:17:32 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:37:18 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	send_bit(pid_t pid, bool bit)
 		if (kill(pid, SIGUSR2) == -1)
 			ft_error("No such process");
 	}
+	return ;
 }
 
 static void	send_next_bit(int signum)
