@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/18 20:36:32 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:16:04 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 **	->	We increment 'bits' by one, to indicated we have moved forward
 **		in the byte.
 **	->	1)	If we already stored 8 bits, it means our byte is full.
-**			We then reboot the static variables at 0 and return the 
+**			We then reboot all static variables at 0 and return the 
 **			corresponding integer.
 **		2)	If not, we return -1, meaning we need more bits to finish.
 **	
@@ -70,7 +70,7 @@ static int	get_byte(int signum)
 **		2)	If get_byte() returns the corresponding integer (>= 0)
 **			It means we received the 8 bits needed and built the byte.
 **		
-**			We then put the current char in our buffer.
+**			Then, we put the current char in our buffer.
 **			If it happens to be '\0', we print our buffer in stdout.
 **		
 **	->	We send the signal SIGUSR1 to the client process for it to
@@ -117,9 +117,9 @@ void	print_msg(int signum, siginfo_t *info, void *unused)
 **	
 **	->	Thanks to sigaction(3), we define which action will occur when
 **		specific signals (here SIGUSR1 or SIGUSR2 as they are the only
-**		ones allowed by the subject) are received.
+**		ones allowed by the subject) is received.
 **	
-**	->	We for a signal from the client one.
+**	->	We wait for a signal from the client.
 **		(For both signals, print_msg() will be called. However, the
 **		succession of actions will defer inside the function according
 **		to the signal recevied).
@@ -134,12 +134,16 @@ int	main(void)
 	struct sigaction	s; 
 
 	pid_server = getpid();
-	ft_putstr_fd("Hi I'm server!\nThis is my PID: ", 1);
+	ft_putstr_fd("Hello dear, I am server!\nAnd here's my PID: ", 1);
 	str = ft_itoa(pid_server);
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("\n\n", 1);
 	s.sa_sigaction = print_msg;
 	s.sa_flags = SA_SIGINFO;
+	ft_putstr_fd("You now need to launch the client program.\n", 1);
+	ft_putstr_fd("Then give it my PID and a message to send.\n", 1);
+	ft_putstr_fd("\nI am now waiting for the transmission...\n", 1);
+	ft_putstr_fd("\n----------------------------------------\n", 1);
 	if (sigaction(SIGUSR1, &s, NULL) < 0)
 		return (1);
 	if (sigaction(SIGUSR2, &s, NULL) < 0)

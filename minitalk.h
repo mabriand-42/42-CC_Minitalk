@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:10:29 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/18 19:01:10 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:02:12 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@
 typedef struct s_trans
 {
 	pid_t	pid;
-	char*	msg;
+	char	*msg;
 }	t_trans;
 
-int	ft_isdigit(int c);
-int	ft_isspace(int c);
+int		ft_isdigit(int c);
+int		ft_isspace(int c);
 size_t	ft_strlen(const char *s);
+size_t	ft_intlen(int n);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_error(char *strerror);
-size_t	ft_intlen(int n);
 
 #endif

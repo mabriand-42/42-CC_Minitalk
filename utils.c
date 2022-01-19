@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:46:54 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/18 18:54:56 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:04:54 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ int	ft_atoi(const char *str)
 	return (nbr * minus);
 }
 
-char				*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	long	tmp;
 	char	*str;
 	size_t	len;
 
 	tmp = (long)n;
-	str = NULL;
 	len = ft_intlen(tmp);
 	if (n < 0)
 	{
@@ -75,14 +74,15 @@ void	ft_putendl_fd(char *str, int fd)
 	{
 		len = ft_strlen(str);
 		write(fd, str, len);
-		write(fd, "\n", 1);
+		write(fd, " \n", 2);
 	}
 	return ;
 }
 
-void		ft_error(char *strerror)
+void	ft_error(char *strerror)
 {
 	ft_putstr_fd("Error: ", 2);
 	ft_putendl_fd(strerror, 2);
 	exit(1);
+	return ;
 }
