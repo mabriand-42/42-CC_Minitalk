@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/19 13:16:04 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:46:20 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	get_byte(int signum)
 	char		c;
 
 	if (signum == SIGUSR2)
-		byte += 1 << bits; 
+		byte += 1 << bits;
 	++bits;
 	if (bits == 8)
 	{
@@ -131,7 +131,7 @@ int	main(void)
 {
 	pid_t				pid_server;
 	char				*str;
-	struct sigaction	s; 
+	struct sigaction	s;
 
 	pid_server = getpid();
 	ft_putstr_fd("Hello dear, I am server!\nAnd here's my PID: ", 1);
