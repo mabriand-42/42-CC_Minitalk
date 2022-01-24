@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:46:54 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/19 13:04:54 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/24 15:30:30 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ char	*ft_itoa(int n)
 	size_t	len;
 
 	tmp = (long)n;
+	str = NULL;
 	len = ft_intlen(tmp);
+	// printf("len = %zu", len);
 	if (n < 0)
 	{
 		len += 1;

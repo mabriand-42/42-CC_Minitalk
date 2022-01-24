@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/19 13:46:20 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/24 15:38:10 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ static int	get_byte(int signum)
 		c = byte;
 		byte = 0;
 		bits = 0;
+		// printf("bits == 8 so returning ==========> %c\n\n", c);
 		return (c);
 	}
+	else
+		// printf("bits != 8 so returning -1\n\n");
 	return (-1);
 }
 
@@ -79,25 +82,71 @@ static int	get_byte(int signum)
 **	Return values:
 **		None.
 */
+// void	print_msg(int signum, siginfo_t *info, void *unused)
+// {
+// 	int			byte;
+// 	static char	buffer[30000];
+// 	static int	i = 0;
+	
+// 	byte = get_byte(signum);
+// 	if (byte != -1)
+// 	{
+// 		buffer[i++] = byte;
+// 		if (!byte)
+// 		{
+// 			ft_putstr_fd(buffer, 1);
+// 			i = 0;
+// 		}
+// 		else if (i == 29999)
+// 		{
+// 			buffer[i] = 0;
+// 			ft_putstr_fd(buffer, 1);
+// 			printf("\n\nWE ARE AT THE END OF BUFFER\n\n");
+// 			int j = 0;
+// 			while (j < 30000)
+// 				buffer[j] = 0;
+// 			i = 0;
+// 		}
+// 	}
+// 	if (kill(info->si_pid, SIGUSR1) == -1)
+// 		ft_error("No such process.");
+// 	(void)unused;
+// 	return ;
+// }
+
 void	print_msg(int signum, siginfo_t *info, void *unused)
 {
 	int			byte;
-	static char	buffer[30000];
+	static char	*buffer;
 	static int	i = 0;
+	static int	size = 0;
+	int			j;
 
 	byte = get_byte(signum);
+	j = 0;
 	if (byte != -1)
 	{
+		if (size == 0)
+		{
+			buffer = (char *)malloc(sizeof(char) * (size + 1));
+			if (!buffer)
+				ft_error("malloc error");
+			size++;
+		}
 		buffer[i++] = byte;
+		if (i >= size)
+		{
+			size *= 2;
+			buffer = realloc(buffer, size);
+			if (!buffer)
+				ft_error("malloc error");
+		}
 		if (!byte)
 		{
+			size = 0;
 			ft_putstr_fd(buffer, 1);
-			i = 0;
-		}
-		else if (i == 29999)
-		{
-			buffer[i] = 0;
-			ft_putstr_fd(buffer, 1);
+			free(buffer);
+			buffer = NULL;
 			i = 0;
 		}
 	}

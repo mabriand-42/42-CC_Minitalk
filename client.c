@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/19 13:45:57 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:59:16 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static void	send_bit(pid_t pid, bool bit)
 static void	send_next_bit(int signum)
 {
 	int	bit;
-
+	// printf("SIG %d has been received\n", signum);
 	if (signum == SIGUSR2)
 		ft_error("Wrong signal. Please relaunch...");
 	bit = get_bit(g_client.msg);
@@ -190,8 +190,9 @@ int	main(int ac, char **av)
 	send_bit(g_client.pid, get_bit(g_client.msg));
 	while (1)
 	{
-		if (sleep(1) == 0)
-			ft_error("Transmission failed.\nPlease relaunch the server");
+		// if (sleep(1) == 0)
+		// 	ft_error("Transmission failed.\nPlease relaunch the server");
+		pause();
 	}
 	return (0);
 }

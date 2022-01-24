@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:44:45 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/19 13:45:42 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/19 15:57:50 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ size_t	ft_intlen(int n)
 	int	i;
 
 	i = 1;
-	while (n)
+	while (n > 10)
 	{
 		n /= 10;
 		i++;
