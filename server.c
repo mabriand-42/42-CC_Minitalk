@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/24 15:38:10 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/26 09:40:25 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void	print_msg(int signum, siginfo_t *info, void *unused)
 		if (i >= size)
 		{
 			size *= 2;
-			buffer = realloc(buffer, size);
+			buffer = realloc(buffer, size);//refaire la fonction
 			if (!buffer)
 				ft_error("malloc error");
 		}
@@ -183,16 +183,16 @@ int	main(void)
 	struct sigaction	s;
 
 	pid_server = getpid();
-	ft_putstr_fd("Hello dear, I am server!\nAnd here's my PID: ", 1);
+	// ft_putstr_fd("Hello dear, I am server!\nAnd here's my PID: ", 1);
 	str = ft_itoa(pid_server);
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("\n\n", 1);
 	s.sa_sigaction = print_msg;
 	s.sa_flags = SA_SIGINFO;
-	ft_putstr_fd("You now need to launch the client program.\n", 1);
-	ft_putstr_fd("Then give it my PID and a message to send.\n", 1);
-	ft_putstr_fd("\nI am now waiting for the transmission...\n", 1);
-	ft_putstr_fd("\n----------------------------------------\n", 1);
+	// ft_putstr_fd("You now need to launch the client program.\n", 1);
+	// ft_putstr_fd("Then give it my PID and a message to send.\n", 1);
+	// ft_putstr_fd("\nI am now waiting for the transmission...\n", 1);
+	// ft_putstr_fd("\n----------------------------------------\n", 1);
 	if (sigaction(SIGUSR1, &s, NULL) < 0)
 		return (1);
 	if (sigaction(SIGUSR2, &s, NULL) < 0)

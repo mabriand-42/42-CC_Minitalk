@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/24 16:59:16 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/26 09:36:26 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	client_speaking(char *av1, char *av2)
 **	->	We give the first drive by sending the first bit of the string
 **		to transfer thanks to send_bit().
 **	
-**	->	We wait for the response signal from the server.
+**	->	We wait for the response signal from the server during 1 second.
 **		(For both signals, send_next_bit() will be called. However,
 **		the succession of actions will defer inside the function
 **		according to the signal recevied).
@@ -176,7 +176,7 @@ int	main(int ac, char **av)
 
 	if (ac != 3)
 	{
-		ft_error("Usage is as follows:\n'./client [PID] [string]'\n");
+		ft_error("Usage is as follows:\n'./client [PID] [string]'\n");                                                  
 		return (1);
 	}
 	pid_server = ft_atoi(av[1]);
@@ -190,9 +190,8 @@ int	main(int ac, char **av)
 	send_bit(g_client.pid, get_bit(g_client.msg));
 	while (1)
 	{
-		// if (sleep(1) == 0)
-		// 	ft_error("Transmission failed.\nPlease relaunch the server");
-		pause();
+		if (sleep(1) == 0)
+			ft_error("Transmission failed.\nPlease relaunch the server");
 	}
 	return (0);
 }
