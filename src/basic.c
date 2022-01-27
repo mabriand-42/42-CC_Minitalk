@@ -6,11 +6,11 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:44:45 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/19 15:57:50 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:28:27 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../inc/minitalk.h"
 
 int	ft_isdigit(int c)
 {

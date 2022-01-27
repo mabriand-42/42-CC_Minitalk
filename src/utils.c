@@ -6,11 +6,11 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:46:54 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/24 15:30:30 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:29:30 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../inc/minitalk.h"
 
 int	ft_atoi(const char *str)
 {
@@ -46,7 +46,6 @@ char	*ft_itoa(int n)
 	tmp = (long)n;
 	str = NULL;
 	len = ft_intlen(tmp);
-	// printf("len = %zu", len);
 	if (n < 0)
 	{
 		len += 1;

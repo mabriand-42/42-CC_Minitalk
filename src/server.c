@@ -6,11 +6,11 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/26 09:45:57 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/27 18:56:14 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../inc/minitalk.h"
 
 /*
 **	Parameters:
@@ -45,18 +45,28 @@ static int	get_byte(int signum)
 		c = byte;
 		byte = 0;
 		bits = 0;
-		// printf("bits == 8 so returning ==========> %c\n\n", c);
 		return (c);
 	}
-	else
-		// printf("bits != 8 so returning -1\n\n");
 	return (-1);
+}
+
+
+
+void	prepare_newByte(char **buffer, int *size, int *i)
+{
+	ft_putstr_fd(*buffer, 1);
+	free(*buffer);
+	*buffer = NULL;
+	*size = 0;
+	*i = 0;
+
+	return ;
 }
 
 /*
 **	Parameters:
 **		@ int 		signum	:
-**		@ sigingo_t *info	:
+**		@ sigingo_t	*info	:
 **		@ void		*unused	:
 **
 **	Description:
@@ -82,39 +92,62 @@ static int	get_byte(int signum)
 **	Return values:
 **		None.
 */
-// void	print_msg(int signum, siginfo_t *info, void *unused)
-// {
-// 	int			byte;
-// 	static char	buffer[30000];
-// 	static int	i = 0;
-	
-// 	byte = get_byte(signum);
-// 	if (byte != -1)
-// 	{
-// 		buffer[i++] = byte;
-// 		if (!byte)
-// 		{
-// 			ft_putstr_fd(buffer, 1);
-// 			i = 0;
-// 		}
-// 		else if (i == 29999)
-// 		{
-// 			buffer[i] = 0;
-// 			ft_putstr_fd(buffer, 1);
-// 			printf("\n\nWE ARE AT THE END OF BUFFER\n\n");
-// 			int j = 0;
-// 			while (j < 30000)
-// 				buffer[j] = 0;
-// 			i = 0;
-// 		}
-// 	}
-// 	if (kill(info->si_pid, SIGUSR1) == -1)
-// 		ft_error("No such process.");
-// 	(void)unused;
-// 	return ;
-// }
+char	*ft_realloc(char *buffer, int size)
+{
+	char	*new_str;
+	int		i;
+
+	new_str = (char *)malloc(sizeof(char) * (size + 1));
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (buffer[i] != '\0')
+	{
+		new_str[i] = buffer[i];
+		++i;
+	}
+	new_str[i] = '\0';
+	free(buffer);
+	return (new_str);
+}
 
 void	print_msg(int signum, siginfo_t *info, void *unused)
+{
+	int			byte;
+	static char	*buffer;
+	static int	i = 0;
+	static int	size = 0;
+	int			j;
+
+	byte = get_byte(signum);
+	j = 0;
+	if (byte != -1)
+	{
+		if (size == 0)
+		{
+			buffer = (char *)malloc(sizeof(char) * (size + 1));
+			if (!buffer)
+				ft_error("malloc error");
+			size++;
+		}
+		buffer[i++] = byte;
+		if (i >= size)
+		{
+			size *= 2;
+			buffer = ft_realloc(buffer, size);
+			if (!buffer)
+				ft_error("malloc error");
+		}
+		if (!byte)
+			prepare_newByte(&buffer, &size, &i);
+	}
+	if (kill(info->si_pid, SIGUSR1) == -1)
+		ft_error("No such process.");
+	(void)unused;
+	return ;
+}
+
+/*void	print_msg(int signum, siginfo_t *info, void *unused)
 {
 	int			byte;
 	static char	*buffer;
@@ -154,7 +187,7 @@ void	print_msg(int signum, siginfo_t *info, void *unused)
 		ft_error("No such process.");
 	(void)unused;
 	return ;
-}
+}*/
 
 /*
 **	Parameters:
@@ -183,16 +216,11 @@ int	main(void)
 	struct sigaction	s;
 
 	pid_server = getpid();
-	// ft_putstr_fd("Hello dear, I am server!\nAnd here's my PID: ", 1);
 	str = ft_itoa(pid_server);
-	ft_putstr_fd(str, 1);
-	ft_putstr_fd("\n\n", 1);
+
+	ft_putendl_fd(str, 1);
 	s.sa_sigaction = print_msg;
 	s.sa_flags = SA_SIGINFO;
-	// ft_putstr_fd("You now need to launch the client program.\n", 1);
-	// ft_putstr_fd("Then give it my PID and a message to send.\n", 1);
-	// ft_putstr_fd("\nI am now waiting for the transmission...\n", 1);
-	// ft_putstr_fd("\n----------------------------------------\n", 1);
 	if (sigaction(SIGUSR1, &s, NULL) < 0)
 		return (1);
 	if (sigaction(SIGUSR2, &s, NULL) < 0)

@@ -6,18 +6,18 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/26 09:45:58 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:51:07 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../inc/minitalk.h"
 
 /*
 **	Having a global variable is necessary as we cannot pass parameters
 **	to a function called when receiving a specific signal. There is in
 **	only 1 inherent argument: the value of the received signal (= int).
 */
-t_trans		g_client;
+t_trans	g_client;
 
 /*
 **	Parameters:
@@ -112,7 +112,7 @@ static void	send_bit(pid_t pid, bool bit)
 static void	send_next_bit(int signum)
 {
 	int	bit;
-	// printf("SIG %d has been received\n", signum);
+
 	if (signum == SIGUSR2)
 		ft_error("Wrong signal. Please relaunch...");
 	bit = get_bit(g_client.msg);
@@ -176,7 +176,7 @@ int	main(int ac, char **av)
 
 	if (ac != 3)
 	{
-		ft_error("Usage is as follows:\n'./client [PID] [string]'\n");                                                  
+		ft_error("Usage is as follows:\n'./client [PID] [string]'\n");
 		return (1);
 	}
 	pid_server = ft_atoi(av[1]);
@@ -192,6 +192,7 @@ int	main(int ac, char **av)
 	{
 		if (sleep(1) == 0)
 			ft_error("Transmission failed.\nPlease relaunch the server");
+		// pause();
 	}
 	return (0);
 }
