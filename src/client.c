@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/27 14:51:07 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/16 12:11:53 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,17 +139,19 @@ static void	send_next_bit(int signum)
 */
 void	client_speaking(char *av1, char *av2)
 {
-	ft_putstr_fd("Client speaking. I receptionned the following:\n\n", 1);
-	ft_putstr_fd("PID of server process: ", 1);
+	// ft_putstr_fd("Client speaking. I receptionned the following:\n\n", 1);
+	// ft_putstr_fd("PID of server process: ", 1);
 	ft_putendl_fd(av1, 1);
-	ft_putstr_fd("MSG to transfer to it: ", 1);
-	ft_putendl_fd(av2, 1);
+	// ft_putstr_fd("MSG to transfer to it: ", 1);
+	// ft_putendl_fd(av2, 1);
 	return ;
 }
 
 /*
+**  int main(int ac, char **av)
+**
 **	Parameters:
-**		@ int	ac		:
+**		@ int	ac      :
 **		@ char	**av	:
 **
 **	Description:
@@ -168,17 +170,15 @@ void	client_speaking(char *av1, char *av2)
 **		according to the signal recevied).
 **	
 **	Return values:
-**		If an error occurs, the process returns 1, else 0.
+**		If an error occurs, the process exits 1 by calling ft_error(1), else 0.
+**    (A return from the main, always performs an exit through its return!)
 */
 int	main(int ac, char **av)
 {
 	pid_t	pid_server;
 
 	if (ac != 3)
-	{
 		ft_error("Usage is as follows:\n'./client [PID] [string]'\n");
-		return (1);
-	}
 	pid_server = ft_atoi(av[1]);
 	if (pid_server < 1)
 		ft_error("Wrong PID");
@@ -192,7 +192,6 @@ int	main(int ac, char **av)
 	{
 		if (sleep(1) == 0)
 			ft_error("Transmission failed.\nPlease relaunch the server");
-		// pause();
 	}
 	return (0);
 }

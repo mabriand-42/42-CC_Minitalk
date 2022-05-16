@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/27 19:23:27 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:39:26 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,13 @@ static int	get_byte(int signum)
 	return (-1);
 }
 
-
-
-void	prepare_newByte(char **buffer, int *size, int *i)
+void	prepare_new_byte(char **buffer, int *size, int *i)
 {
 	ft_putstr_fd(*buffer, 1);
 	free(*buffer);
 	*buffer = NULL;
 	*size = 0;
 	*i = 0;
-
 	return ;
 }
 
@@ -111,83 +108,46 @@ char	*ft_realloc(char *buffer, int size)
 	return (new_str);
 }
 
-void	print_msg(int signum, siginfo_t *info, void *unused)
+void	do_print(int byte)
 {
-	int			byte;
 	static char	*buffer;
 	static int	i = 0;
 	static int	size = 0;
-	int			j;
+
+	if (size == 0)
+	{
+		buffer = (char *)malloc(sizeof(char) * (size + 1));
+		if (!buffer)
+			ft_error("malloc error");
+		size++;
+	}
+	buffer[i++] = byte;
+	if (i >= size)
+	{
+		size *= 2;
+		buffer = ft_realloc(buffer, size);
+		if (!buffer)
+			ft_error("malloc error");
+	}
+	if (!byte)
+		prepare_new_byte(&buffer, &size, &i);
+	return ;
+}
+
+void	print_msg(int signum, siginfo_t *info, void *unused)
+{
+	int	byte;
+	int	j;
 
 	byte = get_byte(signum);
 	j = 0;
 	if (byte != -1)
-	{
-		if (size == 0)
-		{
-			buffer = (char *)malloc(sizeof(char) * (size + 1));
-			if (!buffer)
-				ft_error("malloc error");
-			size++;
-		}
-		buffer[i++] = byte;
-		if (i >= size)
-		{
-			size *= 2;
-			buffer = ft_realloc(buffer, size);
-			if (!buffer)
-				ft_error("malloc error");
-		}
-		if (!byte)
-			prepare_newByte(&buffer, &size, &i);
-	}
+		do_print(byte);
 	if (kill(info->si_pid, SIGUSR1) == -1)
 		ft_error("No such process.");
 	(void)unused;
 	return ;
 }
-
-/*void	print_msg(int signum, siginfo_t *info, void *unused)
-{
-	int			byte;
-	static char	*buffer;
-	static int	i = 0;
-	static int	size = 0;
-	int			j;
-
-	byte = get_byte(signum);
-	j = 0;
-	if (byte != -1)
-	{
-		if (size == 0)
-		{
-			buffer = (char *)malloc(sizeof(char) * (size + 1));
-			if (!buffer)
-				ft_error("malloc error");
-			size++;
-		}
-		buffer[i++] = byte;
-		if (i >= size)
-		{
-			size *= 2;
-			buffer = realloc(buffer, size);//refaire la fonction
-			if (!buffer)
-				ft_error("malloc error");
-		}
-		if (!byte)
-		{
-			size = 0;
-			ft_putstr_fd(buffer, 1);
-			free(buffer);
-			buffer = NULL;
-			i = 0;
-		}
-	}
-	if (kill(info->si_pid, SIGUSR1) == -1)
-		ft_error("No such process.");
-	(void)unused;
-	return ;
-}*/
 
 /*
 **	Parameters:
@@ -217,7 +177,6 @@ int	main(void)
 
 	pid_server = getpid();
 	str = ft_itoa(pid_server);
-
 	ft_putendl_fd(str, 1);
 	s.sa_sigaction = print_msg;
 	s.sa_flags = SA_SIGINFO;
