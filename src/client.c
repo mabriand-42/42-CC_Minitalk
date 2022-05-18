@@ -62,7 +62,7 @@ static int	get_bit(char *str)
 **
 **	Description:
 **	->	1.	If 'bit' is 0, sends the signal SIGUSR1 to the server process.
-**		2.	Else, if 'bit' is 1, we send the other signal: SIGUSR2.
+**		2.	Else, if 'bit' is 1, sends the other signal: SIGUSR2.
 **	
 **	Return values:
 **		None.	
