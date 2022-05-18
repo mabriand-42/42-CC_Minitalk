@@ -13,9 +13,9 @@
 #include "../inc/minitalk.h"
 
 /*
-**	Having a global variable is necessary as we cannot pass parameters
-**	to a function called when receiving a specific signal. There is in
-**	only 1 inherent argument: the value of the received signal (= int).
+**	Having a global variable is necessary as parameters cannot be passed to a
+**	function called when receiving a specific signal. There is only 1 inherent
+**	argument: the value of the received signal (= int).
 */
 t_trans	g_client;
 
@@ -24,20 +24,15 @@ t_trans	g_client;
 **		@ char	*str :
 **
 **	Description:
-**	->	1)	If we consecutively just returned 8 bits, it means a full
-**			char (= byte) of the string 'str' has been sent to the
-**			server process.
-**			If it happens to be '\0', we return -1, meaning we're done
-**			transmitting. Else, we reboot the static variable 'i_bit'
-**			and increment the 'i' one, meaning we go to the next char.
-**		
-**		2)	Do nothing if not.
+**	->	If we consecutively returned 8 bits, it means a full char (=byte) of the
+**		string 'str' has been sent to the server process.
+**			
+**		If it is '\0', returns -1 meaning transmission is done. Else, reboots
+**		the static variable 'i_bit' and increments 'i', going to the next char.
 **
-**	->	We make a right bit-shifting operation to isolate the bit at 
-**		index 'i_bit'.
+**	->	Makes a right bit-shifting operation to isolate the bit at index 'i_bit'.
 **
-**	->	We increment 'i_bit' for the next function call and return the
-**		bit we isolated.
+**	->	Increments 'i_bit' for next function call and returns the isolated bit.
 **	
 **	Return values:
 **		1 or 0 given the result of the right bit-shifting operation.		
@@ -62,14 +57,12 @@ static int	get_bit(char *str)
 
 /*
 **	Parameters:
-**		@ pid_t	pid	:
-**		@ bool	bit	:
+**		@ pid_t	pid	:	the server process id
+**		@ bool	bit	:	bit to be transmitted
 **
 **	Description:
-**	->	1)	If 'bit' is 0, we send the signal SIGUSR1 to the server
-**			process thanks to its 'pid'.
-**		
-**		2)	Else, if 'bit' is 1, we send the other signal: SIGUSR2.
+**	->	1.	If 'bit' is 0, sends the signal SIGUSR1 to the server process.
+**		2.	Else, if 'bit' is 1, we send the other signal: SIGUSR2.
 **	
 **	Return values:
 **		None.	
@@ -91,20 +84,18 @@ static void	send_bit(pid_t pid, bool bit)
 
 /*
 **	Parameters:
-**		@ int	signum	:
+**		@ int	signum	:	integer corresponding to the signal received by the
+**							client process (so sent by the server process)
 **
 **	Description:
-**		When the SIGUSR1 signal is sent from the server, this function
-**		sends the next bit of the string or stops the process if we
-**		are done transmitting.
+**		When SIGUSR1 is sent from the server, this function sends the next bit
+**		of the string or stops the process if it is done transmitting.
 **	
-**	->	We check if the signal received is SIGUSR1. If not, we stop
-**		the program as it is an error.
+**	->	Checks if the signal received is SIGUSR1. If not, the process exits 1
+**		through ft_error(1);
 **
-**	->	1)	If the bit returned by get_bit() is -1 we are successfuly
-**			done transmitting the string to the server.
-**
-**		2)	Else, we send this bit to the server via send_bit().
+**	->	1.	If the bit returned by get_bit(1) is -1, the job is done.
+**		2.	Else, sends this bit to the server via send_bit().
 **	
 **	Return values:
 **		None.	
@@ -118,60 +109,33 @@ static void	send_next_bit(int signum)
 	bit = get_bit(g_client.msg);
 	usleep(100);
 	if (bit == -1)
-	{
-		ft_putstr_fd("\nMessage has been successfuly transmitted!!! =) \n", 1);
 		exit(EXIT_SUCCESS);
-	}
 	send_bit(g_client.pid, bit);
-}
-
-/*
-**	Parameters:
-**		@ char	*av1	:
-**		@ char	*av2	:
-**
-**	Description:
-**		A simple function that prints in stdout some information about
-**		the client and the information received in arguments.
-**	
-**	Return values:
-**		None.	
-*/
-void	client_speaking(char *av1, char *av2)
-{
-	// ft_putstr_fd("Client speaking. I receptionned the following:\n\n", 1);
-	// ft_putstr_fd("PID of server process: ", 1);
-	ft_putendl_fd(av1, 1);
-	// ft_putstr_fd("MSG to transfer to it: ", 1);
-	// ft_putendl_fd(av2, 1);
-	return ;
 }
 
 /*
 **  int main(int ac, char **av)
 **
 **	Parameters:
-**		@ int	ac      :
-**		@ char	**av	:
+**		@ int	ac      :	number of arguments passed to the program
+**		@ char	**av	:	array of arguments (av[0] being its name)
 **
 **	Description:
-**	->	We store the 2nd argument (= server pid) as we need it to
-**		communicate with the process.
+**	->	Store the server's pid (av[1]) as you need it to talk to the process.
 **	
-**	->	Thanks to sigaction(3), we define which action will occur when
-**		SIGUSR1 or SIGUSR2 is received.
+**	->	Thanks to sigaction(3), defines which action occurs when SIGUSR1 or
+**		SIGUSR2 is received.
 **
-**	->	We give the first drive by sending the first bit of the string
-**		to transfer thanks to send_bit().
+**	->	Gives the first drive by sending the first bit of the string to transfer 
+**		thanks to send_bit(2).
 **	
-**	->	We wait for the response signal from the server during 1 second.
-**		(For both signals, send_next_bit() will be called. However,
-**		the succession of actions will defer inside the function
-**		according to the signal recevied).
+**	->	Waits for the response signal from the server during 2 second.
+**		(For both signals, send_next_bit(1) will be called. However, the set of
+**		actions will defer inside the function according to the signal recevied).
 **	
 **	Return values:
 **		If an error occurs, the process exits 1 by calling ft_error(1), else 0.
-**    (A return from the main, always performs an exit through its return!)
+**    	(A return from the main always performs an exit through its return!)
 */
 int	main(int ac, char **av)
 {
@@ -182,7 +146,7 @@ int	main(int ac, char **av)
 	pid_server = ft_atoi(av[1]);
 	if (pid_server < 1)
 		ft_error("Wrong PID");
-	client_speaking(av[1], av[2]);
+	ft_putendl_fd(av[1], 1);
 	g_client.msg = av[2];
 	g_client.pid = pid_server;
 	signal(SIGUSR1, send_next_bit);
@@ -190,7 +154,7 @@ int	main(int ac, char **av)
 	send_bit(g_client.pid, get_bit(g_client.msg));
 	while (1)
 	{
-		if (sleep(1) == 0)
+		if (sleep(2) == 0)
 			ft_error("Transmission failed.\nPlease relaunch the server");
 	}
 	return (0);

@@ -137,10 +137,10 @@ void	do_print(int byte)
 void	print_msg(int signum, siginfo_t *info, void *unused)
 {
 	int	byte;
-	int	j;
+	/*int	j;*/
 
 	byte = get_byte(signum);
-	j = 0;
+	/*j = 0;*/
 	if (byte != -1)
 		do_print(byte);
 	if (kill(info->si_pid, SIGUSR1) == -1)
