@@ -12,7 +12,14 @@ As bonuses, the server acknoledges every message received by sending back a sign
  Unicode characters are supported!
 
 ##  Installation                        ##
+Enter the repository you just cloned and simply run the command `make`.
+You will then end up with two executables: server and client. Split your terminal in two, and launch
+each program, starting with server.
+
 ##  Usage                               ##
+`./server`
+`./client [server_PID] [string_to_send]` where server_PID is the first output of the server launch.
+
 ##  Support                             ##
 ##  Roadmap                             ##
 ##  Conributing                         ##
