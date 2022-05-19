@@ -1,4 +1,4 @@
-# Minitalk                              #
+b# Minitalk                              #
 
 >   The purpose of this project is to code a small data exchange program using UNIX signals.
 
@@ -17,7 +17,7 @@ You will then end up with two executables: server and client. Split your termina
 each program, starting with server.
 
 ##  Usage                               ##
-`./server`
+`./server` </br>
 `./client [server_PID] [string_to_send]` where server_PID is the first output of the server launch.
 
 ##  Support                             ##
