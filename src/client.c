@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/16 12:11:53 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:15:40 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ int	main(int ac, char **av)
 	pid_server = ft_atoi(av[1]);
 	if (pid_server < 1)
 		ft_error("Wrong PID");
-	ft_putendl_fd(av[1], 1);
 	g_client.msg = av[2];
 	g_client.pid = pid_server;
 	signal(SIGUSR1, send_next_bit);
