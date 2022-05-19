@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:10:29 by mabriand          #+#    #+#             */
-/*   Updated: 2022/01/19 13:02:12 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:52:28 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ typedef struct s_trans
 	char	*msg;
 }	t_trans;
 
-int		ft_isdigit(int c);
-int		ft_isspace(int c);
+/*	Libft			*/
 size_t	ft_strlen(const char *s);
 size_t	ft_intlen(int n);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
-void	ft_putendl_fd(char *s, int fd);
+char	*ft_realloc(char *buffer, int size);
+/*	Utils			*/
 void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
 void	ft_error(char *strerror);
 
 #endif

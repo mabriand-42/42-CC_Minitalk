@@ -6,12 +6,11 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/16 11:39:26 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:47:38 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minitalk.h"
-
 
 /*
 **
@@ -25,59 +24,6 @@ void	prepare_new_delivery(char **buffer, int *size, int *i)
 	*i = 0;
 	return ;
 }
-
-/*
-**
-*/
-char	*ft_realloc(char *buffer, int size)
-{
-	char	*new_str;
-	int		i;
-
-	new_str = (char *)malloc(sizeof(char) * (size + 1));
-	if (!new_str)
-		return (NULL);
-	i = 0;
-	while (buffer[i] != '\0')
-	{
-		new_str[i] = buffer[i];
-		++i;
-	}
-	new_str[i] = '\0';
-	free(buffer);
-	return (new_str);
-}
-
-
-/*
-**	Parameters:
-**		@ int 		signum	:
-**		@ sigingo_t	*info	:
-**		@ void		*unused	:
-**
-**	Description:
-**		This function constructs the message transmitted bit by bit thanks
-**		to the signals received from the client process.
-**	
-**	->	When a signal is received, it is transmitted to get_byte().
-**
-**	->	1)	If get_byte() returns -1.
-**			It means that we are lacking bits to create the current
-**			character (i.e. byte = 8 bits (= 1 or 0).
-**			We must then keep going and collect the rest.
-**	
-**		2)	If get_byte() returns the corresponding integer (>= 0)
-**			It means we received the 8 bits needed and built the byte.
-**		
-**			Then, we put the current char in our buffer.
-**			If it happens to be '\0', we print our buffer in stdout.
-**		
-**	->	We send the signal SIGUSR1 to the client process for it to
-**		continue the transmission and get the next bit. 
-**	
-**	Return values:
-**		None.
-*/
 
 /*
 **	Parameters:

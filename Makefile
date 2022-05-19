@@ -6,11 +6,11 @@
 #    By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 14:02:02 by mabriand          #+#    #+#              #
-#    Updated: 2022/01/27 14:13:51 by mabriand         ###   ########.fr        #
+#    Updated: 2022/05/19 11:44:56 by mabriand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SERVER		=	./server	# Gives the name of the final output for the server and its location.
+SERVER		=	./server
 CLIENT		=	./client	
 
 ##################################### PATH #####################################
@@ -21,12 +21,12 @@ SRC			=	./src/
 #-----------------------------SERVER-#
 SRC_SERVER	=	$(SRC)server.c \
 				$(SRC)utils.c \
-				$(SRC)basic.c
+				$(SRC)libft.c
 				
 #-----------------------------CLIENT-#
 SRC_CLIENT	=	$(SRC)client.c \
 				$(SRC)utils.c \
-				$(SRC)basic.c
+				$(SRC)libft.c
 
 ################################### INCLUDES ###################################
 

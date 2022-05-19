@@ -85,7 +85,7 @@ static void	send_bit(pid_t pid, bool bit)
 /*
 **	Parameters:
 **		@ int	signum	:	integer corresponding to the signal received by the
-**							client process (so sent by the server process)
+**							client process.
 **
 **	Description:
 **		When SIGUSR1 is sent from the server, this function sends the next bit
