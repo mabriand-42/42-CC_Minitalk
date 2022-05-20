@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/19 12:15:40 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:09:20 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_trans	g_client;
 **	Return values:
 **		1 or 0 given the result of the right bit-shifting operation.		
 */
-static int	get_bit(char *str)
+static int	ft_get_bit(char *str)
 {
 	bool		bit;
 	static int	i_bit = 0;
@@ -67,17 +67,17 @@ static int	get_bit(char *str)
 **	Return values:
 **		None.	
 */
-static void	send_bit(pid_t pid, bool bit)
+static void	ft_send_bit(pid_t pid, bool bit)
 {
 	if (bit == 0)
 	{
 		if (kill(pid, SIGUSR1) == -1)
-			ft_error("No such process");
+			ft_print_error("No such process");
 	}
 	else if (bit == 1)
 	{
 		if (kill(pid, SIGUSR2) == -1)
-			ft_error("No such process");
+			ft_print_error("No such process");
 	}
 	return ;
 }
@@ -100,17 +100,17 @@ static void	send_bit(pid_t pid, bool bit)
 **	Return values:
 **		None.	
 */
-static void	send_next_bit(int signum)
+static void	ft_send_next_bit(int signum)
 {
 	int	bit;
 
 	if (signum == SIGUSR2)
-		ft_error("Wrong signal. Please relaunch...");
-	bit = get_bit(g_client.msg);
+		ft_print_error("Wrong signal. Please relaunch...");
+	bit = ft_get_bit(g_client.msg);
 	usleep(100);
 	if (bit == -1)
 		exit(EXIT_SUCCESS);
-	send_bit(g_client.pid, bit);
+	ft_send_bit(g_client.pid, bit);
 }
 
 /*
@@ -142,19 +142,19 @@ int	main(int ac, char **av)
 	pid_t	pid_server;
 
 	if (ac != 3)
-		ft_error("Usage is as follows:\n'./client [PID] [string]'\n");
+		ft_print_error("Usage is as follows:\n'./client [PID] [string]'\n");
 	pid_server = ft_atoi(av[1]);
 	if (pid_server < 1)
-		ft_error("Wrong PID");
+		ft_print_error("Wrong PID");
 	g_client.msg = av[2];
 	g_client.pid = pid_server;
-	signal(SIGUSR1, send_next_bit);
-	signal(SIGUSR2, send_next_bit);
-	send_bit(g_client.pid, get_bit(g_client.msg));
+	signal(SIGUSR1, ft_send_next_bit);
+	signal(SIGUSR2, ft_send_next_bit);
+	ft_send_bit(g_client.pid, ft_get_bit(g_client.msg));
 	while (1)
 	{
 		if (sleep(2) == 0)
-			ft_error("Transmission failed.\nPlease relaunch the server");
+			ft_print_error("Transmission failed.\nPlease relaunch the server");
 	}
 	return (0);
 }

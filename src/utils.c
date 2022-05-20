@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:46:54 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/19 11:52:27 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:08:37 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,9 @@ void	ft_putendl_fd(char *str, int fd)
 	return ;
 }
 
-/*
-**  void ft_error(char *strerror)
-**
-**	Parameters:
-**		@ char  *strerror : the error message to print in order
-**
-**	Description:
-**	->	
-**	
-**	Return values:
-**		If an error occurs, the process returns 1 by calling ft_error(1), else 0.
-*/
-void	ft_error(char *strerror)
+void	ft_print_error(char *error_str)
 {
 	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(strerror, 2);
+	ft_putendl_fd(error_str, 2);
 	exit(1);
 }

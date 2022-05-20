@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:10:29 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/19 11:52:28 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:08:57 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ char	*ft_realloc(char *buffer, int size);
 /*	Utils			*/
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_error(char *strerror);
+void	ft_print_error(char *strerror);
 
 #endif

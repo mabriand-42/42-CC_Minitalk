@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/19 11:47:38 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:13:09 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 **
 */
-void	prepare_new_delivery(char **buffer, int *size, int *i)
+void	ft_prep_delivery(char **buffer, int *size, int *i)
 {
 	ft_putstr_fd(*buffer, 1);
 	free(*buffer);
@@ -42,7 +42,7 @@ void	prepare_new_delivery(char **buffer, int *size, int *i)
 **	Return values:
 **		If the byte is full, it returns the corresponding int, -1 else.		
 */
-void	store_byte(int byte)
+void	ft_store_byte(int byte)
 {
 	static char	*buffer;
 	static int	i = 0;
@@ -52,7 +52,7 @@ void	store_byte(int byte)
 	{
 		buffer = (char *)malloc(sizeof(char) * (size + 1));
 		if (!buffer)
-			ft_error("malloc error");
+			ft_print_error("malloc error");
 		size++;
 	}
 	buffer[i++] = byte;
@@ -61,10 +61,10 @@ void	store_byte(int byte)
 		size *= 2;
 		buffer = ft_realloc(buffer, size);
 		if (!buffer)
-			ft_error("malloc error");
+			ft_print_error("malloc error");
 	}
 	if (!byte)
-		prepare_new_delivery(&buffer, &size, &i);
+		ft_prep_delivery(&buffer, &size, &i);
 	return ;
 }
 
@@ -87,7 +87,7 @@ void	store_byte(int byte)
 **	Return values:
 **		If the byte is full, it returns the corresponding int, -1 else.		
 */
-static int	get_byte(int signum)
+static int	ft_get_byte(int signum)
 {
 	static int	bits = 0;
 	static char	byte = 0;
@@ -121,15 +121,15 @@ static int	get_byte(int signum)
 **	Return values:
 **		None.
 */
-void	print_msg(int signum, siginfo_t *info, void *unused)
+void	ft_print_msg(int signum, siginfo_t *info, void *unused)
 {
 	int	byte;
 
-	byte = get_byte(signum);
+	byte = ft_get_byte(signum);
 	if (byte != -1)
-		store_byte(byte);
+		ft_store_byte(byte);
 	if (kill(info->si_pid, SIGUSR1) == -1)
-		ft_error("No such process.");
+		ft_print_error("No such process.");
 	(void)unused;
 	return ;
 }
@@ -161,7 +161,7 @@ int	main(void)
 	pid_server = getpid();
 	str = ft_itoa(pid_server);
 	ft_putendl_fd(str, 1);
-	s.sa_sigaction = print_msg;
+	s.sa_sigaction = ft_print_msg;
 	s.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &s, NULL) < 0)
 		return (1);
