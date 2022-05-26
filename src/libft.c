@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:10:24 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/20 11:05:52 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/26 11:58:53 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ size_t	ft_intlen(int n)
 	return (i);
 }
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int	i;
 	int	minus;

@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/20 11:13:09 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/26 11:35:04 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,15 +152,19 @@ void	ft_print_msg(int signum, siginfo_t *info, void *unused)
 **	Return values:
 **		If an error occurs, the process returns 1, else 0.
 */
-int	main(void)
+int	main(int ac, char **av)
 {
 	pid_t				pid_server;
 	char				*str;
 	struct sigaction	s;
 
+	(void)av;
+	if (ac != 1)
+		ft_print_error("Usage is as follows:\n'./server'\n");
 	pid_server = getpid();
 	str = ft_itoa(pid_server);
 	ft_putendl_fd(str, 1);
+	free(str);
 	s.sa_sigaction = ft_print_msg;
 	s.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &s, NULL) < 0)

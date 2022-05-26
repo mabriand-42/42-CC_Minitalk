@@ -6,12 +6,13 @@
 #    By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/27 14:02:02 by mabriand          #+#    #+#              #
-#    Updated: 2022/05/19 11:44:56 by mabriand         ###   ########.fr        #
+#    Updated: 2022/05/26 12:09:25 by mabriand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SERVER		=	./server
-CLIENT		=	./client	
+CLIENT		=	./client
+COMMON		=	common.a
 
 ##################################### PATH #####################################
 SRC			=	./src/
@@ -20,14 +21,14 @@ SRC			=	./src/
 
 #-----------------------------SERVER-#
 SRC_SERVER	=	$(SRC)server.c \
-				$(SRC)utils.c \
-				$(SRC)libft.c
 				
 #-----------------------------CLIENT-#
 SRC_CLIENT	=	$(SRC)client.c \
-				$(SRC)utils.c \
-				$(SRC)libft.c
 
+#-----------------------------COMMON-#
+SRC_COMMON	=	$(SRC)utils.c \
+				$(SRC)libft.c
+				
 ################################### INCLUDES ###################################
 
 INC			=	./inc/
@@ -42,21 +43,26 @@ OBJ_SERVER	=	$(SRC_SERVER:.c=.o)
 
 OBJ_CLIENT	=	$(SRC_CLIENT:.c=.o)
 
+OBJ_COMMON	=	$(SRC_COMMON:.c=.o)
+
 ##################################### RULES ####################################
 
-all:		$(CLIENT) $(SERVER)
+all:		$(COMMON) $(CLIENT) $(SERVER)
+
+$(COMMON):	$(OBJ_COMMON)
+	ar	rc $(COMMON) $(OBJ_COMMON)
 
 $(SERVER):	$(OBJ_SERVER)
-		$(CC) $(CFLAGS) -I$(INC) -o $(SERVER) $(OBJ_SERVER)
+		$(CC) $(CFLAGS) -I$(INC) -o $(SERVER) $(OBJ_SERVER) $(COMMON)
 
 $(CLIENT):	$(OBJ_CLIENT)
-		$(CC) $(CFLAGS) -I$(INC) -o $(CLIENT) $(OBJ_CLIENT)
+		$(CC) $(CFLAGS) -I$(INC) -o $(CLIENT) $(OBJ_CLIENT) $(COMMON)
 
 clean:
-	rm -f $(OBJ_SERVER) $(OBJ_CLIENT)
+	rm -f $(OBJ_SERVER) $(OBJ_CLIENT) $(OBJ_COMMON)
 
 fclean:	clean
-	rm -f $(SERVER) $(CLIENT)
+	rm -f $(SERVER) $(CLIENT) $(COMMON)
 
 re:	fclean all
 

@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:46:54 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/20 11:08:37 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/26 11:58:42 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_putstr_fd(char *str, int fd)
 {
 	if (str)
 		write(fd, str, ft_strlen(str));
+	return ;
 }
 
 void	ft_putendl_fd(char *str, int fd)
