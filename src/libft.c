@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:10:24 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/26 11:58:53 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/27 14:59:35 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int	ft_atoi(const char *str)
 			minus = -1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (str[i] >= '0' && str[i] <= '9' && str[i] != '\0')
 	{
 		nbr = (nbr * 10) + str[i] - 48;
 		i++;
 	}
-	return (nbr * minus);
+	return (nbr);
 }
 
 char	*ft_itoa(int n)
