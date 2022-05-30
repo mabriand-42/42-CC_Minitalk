@@ -13,7 +13,7 @@ As bonuses, the server acknoledges every message received by sending back a sign
 
 ##  Installation                        ##
 
-`$ git clone [https://github.com/mariebriand/42-CC_Minitalk](https://github.com/mariebriand/42-CC_Minitalk.git)` </br>
+`$ git clone https://github.com/mariebriand/42-CC_Minitalk.git` </br>
 `$ cd 42-CC_Minitalk` </br>
 `$ make` </br>
 
@@ -21,8 +21,13 @@ You will then end up with two executables: server and client. Split your termina
 each program, starting with server.
 
 ##  Usage                               ##
-`./server` </br>
-`./client [server_PID] [string_to_send]` where server_PID is the first output of the server launch.
+`$ ./server` </br>
+`$ ./client [server_PID] [string_to_send]` where server_PID is the first output of the server launch. </br>
+
+To run the tester: </br>
+
+`$ cd tester` </br>
+`$ sh minitalk_tester.sh` </br>
 
 ##  Support                             ##
 ##  Roadmap                             ##
@@ -33,3 +38,6 @@ The tester was made by [adbenoit-9](https://github.com/adbenoit-9) and cloned fr
 
 ##  License                             ##
 ##  Project status                      ##
+
+
+
