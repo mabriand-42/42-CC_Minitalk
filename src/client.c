@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/27 15:00:24 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:13:29 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	main(int ac, char **av)
 
 	if (ac != 3)
 		ft_print_error("Usage is as follows:\n'./client [PID] [string]'\n");
-	pid_server = ft_atoi(av[1]);
+	pid_server = ft_light_atoi(av[1]);
 	if (pid_server < 1)
 		ft_print_error("Wrong PID");
 	g_client.msg = av[2];

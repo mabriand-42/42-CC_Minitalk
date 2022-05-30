@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:10:29 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/20 11:08:57 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:13:38 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_trans
 /*	Libft			*/
 size_t	ft_strlen(const char *s);
 size_t	ft_intlen(int n);
-int		ft_atoi(const char *str);
+int		ft_light_atoi(const char *str);
 char	*ft_itoa(int n);
 char	*ft_realloc(char *buffer, int size);
 /*	Utils			*/

@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:10:24 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/27 14:59:35 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:13:04 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,22 @@ size_t	ft_intlen(int n)
 	return (i);
 }
 
-int	ft_atoi(const char *str)
+int	ft_light_atoi(const char *str)
 {
 	int	i;
-	int	minus;
 	int	nbr;
 
 	i = 0;
-	minus = 1;
 	nbr = 0;
-	while ((str[i] == '\t' || str[i] == '\n' || str[i] == ' '
-			|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r'))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			minus = -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9' && str[i] != '\0')
+	while (str[i] >= '0' && str[i] <= '9' && str[i])
 	{
 		nbr = (nbr * 10) + str[i] - 48;
 		i++;
 	}
+	if (str[i])
+		return (0);
 	return (nbr);
+
 }
 
 char	*ft_itoa(int n)
