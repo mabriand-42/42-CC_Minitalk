@@ -22,7 +22,8 @@ each program, starting with server.
 
 ##  Usage                               ##
 `$ ./server` </br>
-`$ ./client [server_PID] [string_to_send]` where server_PID is the first output of the server launch. </br>
+`$ ./client [server_PID] [string_to_send]` where server_PID is the first output of the server launch.
+</br>
 
 To run the tester: </br>
 
@@ -34,7 +35,8 @@ To run the tester: </br>
 ##  Conributing                         ##
 ##  Authors and acknowledgement         ##
 
-The tester was made by [adbenoit-9](https://github.com/adbenoit-9) and cloned from her own project repository.
+The tester was made by [adbenoit-9](https://github.com/adbenoit-9) and cloned from her own project
+repository.
 
 ##  License                             ##
 ##  Project status                      ##
