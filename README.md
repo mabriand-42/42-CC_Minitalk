@@ -12,7 +12,11 @@ As bonuses, the server acknoledges every message received by sending back a sign
  Unicode characters are supported!
 
 ##  Installation                        ##
-Enter the repository you just cloned and simply run the command `make`.
+
+`$ git clone [https://github.com/mariebriand/42-CC_Minitalk](https://github.com/mariebriand/42-CC_Minitalk.git)` </br>
+`$ cd 42-CC_Minitalk` </br>
+`$ make` </br>
+
 You will then end up with two executables: server and client. Split your terminal in two, and launch
 each program, starting with server.
 
@@ -24,5 +28,10 @@ each program, starting with server.
 ##  Roadmap                             ##
 ##  Conributing                         ##
 ##  Authors and acknowledgement         ##
+
+The tester was made by [adbenoit-9][1]
+
 ##  License                             ##
 ##  Project status                      ##
+
+[1]: https://github.com/adbenoit-9
