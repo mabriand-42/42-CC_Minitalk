@@ -29,9 +29,7 @@ each program, starting with server.
 ##  Conributing                         ##
 ##  Authors and acknowledgement         ##
 
-The tester was made by [adbenoit-9][1]
+The tester was made by [adbenoit-9](https://github.com/adbenoit-9) and cloned from her own project repository.
 
 ##  License                             ##
 ##  Project status                      ##
-
-[1]: https://github.com/adbenoit-9
