@@ -46,7 +46,12 @@ repository.
 
 ## License ##
 
+<<<<<<< HEAD
 ## Project status ##
+=======
+[![forthebadge](https://forthebadge.com/images/badges/made-with-c.svg)](https://forthebadge.com)
+
+>>>>>>> 09a4c17d93acb6d858f253e24fae80961edec7cb
 
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c.svg)](https://forthebadge.com)
