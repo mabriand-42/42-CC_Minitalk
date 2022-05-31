@@ -6,15 +6,12 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:34:21 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/26 11:35:04 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:49:04 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minitalk.h"
 
-/*
-**
-*/
 void	ft_prep_delivery(char **buffer, int *size, int *i)
 {
 	ft_putstr_fd(*buffer, 1);

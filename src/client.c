@@ -6,7 +6,7 @@
 /*   By: mabriand <mabriand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 12:04:51 by mabriand          #+#    #+#             */
-/*   Updated: 2022/05/30 13:13:29 by mabriand         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:48:41 by mabriand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_trans	g_client;
 
 /*
 **	Parameters:
-**		@ char	*str :
+**		@ char	*str	:	the string to send
 **
 **	Description:
 **	->	If we consecutively returned 8 bits, it means a full char (=byte) of the
@@ -117,7 +117,7 @@ static void	ft_send_next_bit(int signum)
 **  int main(int ac, char **av)
 **
 **	Parameters:
-**		@ int	ac      :	number of arguments passed to the program
+**		@ int	ac		:	number of arguments passed to the program
 **		@ char	**av	:	array of arguments (av[0] being its name)
 **
 **	Description:
