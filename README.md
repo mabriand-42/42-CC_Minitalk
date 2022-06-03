@@ -58,3 +58,4 @@ repository.
 This project is finished, it has passed the 3 needed peer-corrections.
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
