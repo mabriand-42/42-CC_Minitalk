@@ -1,5 +1,7 @@
 # Minitalk #
 
+[![mabriand's 42 minitalk Score](https://badge42.vercel.app/api/v2/cl3y8m48b020709mm5fyc36fq/project/2225086)](https://github.com/JaeSeoKim/badge42)
+
 > The purpose of this project is to code a small data exchange program using UNIX signals.
 
 ## Description ##
@@ -11,6 +13,8 @@ The server launches first by printing its PID. The client then takes the server'
 
 As bonuses, the server acknoledges every message received by sending back a signal to the client and
  Unicode characters are supported!
+
+<!-- ## Visuals ## -->
 
 ## Installation ##
 
@@ -32,19 +36,25 @@ To run the tester: </br>
 `$ cd tester` </br>
 `$ sh minitalk_tester.sh` </br>
 
-## Support ##
+<!-- ## Support ## -->
 
 ## Roadmap ##
 
-## Conributing ##
+* Check for the right license (and document myself about open source licenses).
+* Add a way to reach me for support.
+* Generate and add a visual in the README.md
+
+<!-- ## Conributing ## -->
 
 ## Authors and acknowledgement ##
 
 The tester was made by [adbenoit-9](https://github.com/adbenoit-9) and cloned from her own project
 repository.
 
-## License ##
+<!-- ## License ## -->
 
 ## Project status ##
+
+This project is finished, it has passed the 3 needed peer-corrections.
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c.svg)](https://forthebadge.com)
