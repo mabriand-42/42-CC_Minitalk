@@ -43,6 +43,7 @@ To run the tester: </br>
 * Check for the right license (and document myself about open source licenses).
 * Add a way to reach me for support.
 * Generate and add a visual in the README.md
+* Add the official subject from 42intra.
 
 <!-- ## Conributing ## -->
 
